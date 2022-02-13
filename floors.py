@@ -1,15 +1,32 @@
-from buttons import HallButton
+from button_panels import HallButtonPanel
 
 
 class Floor:
-    def __init__(self, floor_number: int, up_flag: bool = True, down_flag: bool = True):
-        self.floor_number = floor_number
-        self.up_flag = up_flag
-        self.down_flag = down_flag
-        self._set_up_buttons()
+    """
+    A class that represents Floor objects in a building.
 
-    def _set_up_buttons(self):
-        if self.up_flag:
-            self.up_button = HallButton("UP")
-        if self.down_flag:
-            self.down_button = HallButton("DOWN")
+    parameters:
+    floor_number [int]: current floor number
+    lowest_floor [int]: lowest floor of building
+    highest_floor [int]: highest floor of building
+    button_panel [HallButtonPanel object]: an object that represents the hall button panel
+    """
+
+    def __init__(self, floor_number: int, lowest_floor: int, highest_floor: int):
+        self._floor_number = floor_number
+        self._lowest_floor = lowest_floor
+        self._highest_floor = highest_floor
+        self._button_panel = HallButtonPanel(
+            panel_id=floor_number,
+            is_need_up_button=self.is_need_up_button(),
+            is_need_down_button=self.is_need_down_button(),
+        )
+
+    def is_need_up_button(self):
+        return self._floor_number != self._highest_floor
+
+    def is_need_down_button(self):
+        return self._floor_number != self._lowest_floor
+
+    def get_floor_number(self):
+        return self._floor_number
