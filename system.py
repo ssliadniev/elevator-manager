@@ -1,14 +1,22 @@
 from building import Build
+from elevators import Elevator
 
 
 class ElevatorSystem:
+    def __init__(self, lowest_floor, highest_floor, elevator_count):
+        self._min_floor = lowest_floor
+        self._max_floor = highest_floor
+        self._elevator_number = elevator_count
+        self._elevators = list()
+        self._requests = list()
+        self._build = Build(
+            lowest_floor=lowest_floor,
+            highest_floor=highest_floor,
+            elevator_count=elevator_count,
+        )
+        self.__create_elevators_objects()
 
-    def __init__(self, min_floor, max_floor, elevator_number):
-        self.min_floor = min_floor
-        self.max_floor = max_floor
-        self.build = Build(min_floor=min_floor, max_floor=max_floor, elevator_number=elevator_number)
-
-
-if __name__ == "__main__":
-    launch_system = ElevatorSystem(min_floor=-2, max_floor=40, elevator_number=2)
-    print(launch_system)
+    def __create_elevators_objects(self):
+        self._elevators = [
+            Elevator(elevator_id) for elevator_id in range(self._elevator_number)
+        ]
