@@ -51,11 +51,11 @@ class HallButton(Button):
 
     def __init__(self, button_name: str, direction: str):
         super(HallButton, self).__init__(button_name)
-        self._direction = direction
+        self.direction = direction
 
     @property
     def direction(self):
-        return self._direction
+        return self.direction
 
     @direction.setter
     def direction(self, direction):
@@ -64,4 +64,4 @@ class HallButton(Button):
             raise ValueError(
                 f"Error. Set wrong direction: '{direction}'.\nAvailable directions: up, down."
             )
-        self._direction = direction
+        self.direction = direction
